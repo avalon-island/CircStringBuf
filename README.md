@@ -1,4 +1,4 @@
-# simple circular buffer header-only library
+# simple circular buffer library
 
 contains specialized buffer for
 
