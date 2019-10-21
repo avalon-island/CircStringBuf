@@ -1,13 +1,9 @@
-# simple circular buffer library
+# simple circular buffer library (1.0.0)
 
-contains specialized buffer for
+contains specialized circular buffer for
 
 * strings, i.e. character arrays
-* bytearrays [to be done]
-* user defined structs [to be done]
 
 ## usage
-
-copy the header to your project and include it where you use it
 
 have a look in the tests
