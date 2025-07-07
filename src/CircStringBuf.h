@@ -59,7 +59,7 @@ public:
 		return circstringbuf_push(&bufferCtl, string);
 	}
 
-	int strlen(size_t &size) {
+	int pstrlen(size_t &size) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_strlen(&bufferCtl, &size);
@@ -108,7 +108,7 @@ public:
 		return circstringbuf_push(&bufferCtl, string);
 	}
 
-	int strlen(size_t &size) {
+	int pstrlen(size_t &size) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_strlen(&bufferCtl, &size);
