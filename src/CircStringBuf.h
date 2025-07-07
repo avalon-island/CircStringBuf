@@ -44,6 +44,37 @@ public:
 	CircularStringBuffer(size_t size);
 	~CircularStringBuffer();
 
+	inline int reset(void) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_reset(&bufferCtl);
+	}
+
+	int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
+
+	int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
+	int push(const char *string) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_push(&bufferCtl, string;
+	}
+
+	int strlen(size_t &size) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_strlen(&bufferCtl, size);
+	}
+	int pop(char *string) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_pop(&bufferCtl, string);
+	}
+	int drop(void) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_drop(&bufferCtl);
+	}
+
 protected:
 
 	thread::Mutex mtxCSBuffer;
@@ -61,6 +92,37 @@ public:
 
 	CircularStringBuffer() : bufferCtl({buffer, BufferSize, 0, 0, true}) {}
 	~CircularStringBuffer() {}
+
+	inline int reset(void) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_reset(&bufferCtl);
+	}
+
+	int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
+
+	int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
+	int push(const char *string) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_push(&bufferCtl, string;
+	}
+
+	int strlen(size_t &size) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_strlen(&bufferCtl, size);
+	}
+	int pop(char *string) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_pop(&bufferCtl, string);
+	}
+	int drop(void) {
+	thread::ScopedMutexLock lock(mtxCSBuffer);
+
+		return circstringbuf_drop(&bufferCtl);
+	}
 
 protected:
 
