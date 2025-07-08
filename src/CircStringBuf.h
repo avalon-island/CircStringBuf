@@ -55,7 +55,7 @@ public:
 
 	inline int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
 
-	inline int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
+	inline int checkFit(size_t &size) { return circstringbuf_checkfit(&bufferCtl, &size); }
 	inline int
 	push(const char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
