@@ -87,7 +87,7 @@ protected:
 	inline int
 	pmalloc(char **pStr1, size_t *pSize, char **pStr2) {
 
-		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, 0);
+		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, CIRCBUF_OK);
 	}
 	inline int
 	pmalloc(char **pStr1, size_t *pSize, char **pStr2,
@@ -98,7 +98,7 @@ protected:
 	inline int
 	pmalloc_contiguous(char **pStr1, size_t size) {
 
-		return circstringbuf_malloc_contiguous(&bufferCtl, pStr1, size, 0);
+		return circstringbuf_malloc_contiguous(&bufferCtl, pStr1, size, CIRCBUF_OK);
 	}
 	inline int
 	pmalloc_contiguous(char **pStr1, size_t size, circstringbufstatus_t flags) {
@@ -137,7 +137,7 @@ public:
 
 	inline int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
 
-	inline int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
+	inline int checkFit(size_t &size) { return circstringbuf_checkfit(&bufferCtl, &size); }
 	inline int
 	push(const char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
@@ -167,10 +167,20 @@ public:
 protected:
 
 	inline int
+	pmalloc(char **pStr1, size_t *pSize, char **pStr2) {
+
+		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, CIRCBUF_OK);
+	}
+	inline int
 	pmalloc(char **pStr1, size_t *pSize, char **pStr2,
 		circstringbufstatus_t flags) {
 
 		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, flags);
+	}
+	inline int
+	pmalloc_contiguous(char **pStr1, size_t size) {
+
+		return circstringbuf_malloc_contiguous(&bufferCtl, pStr1, size, CIRCBUF_OK);
 	}
 	inline int
 	pmalloc_contiguous(char **pStr1, size_t size, circstringbufstatus_t flags) {
