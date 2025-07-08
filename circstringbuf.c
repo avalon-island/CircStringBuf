@@ -248,7 +248,7 @@ circstringbuf_malloc_contiguous(circstringbuf_t *cb,
 	 * Check arguments validity: cb and pStr1 should point to a valid
 	 * address space.
 	 */
-	if (!cb || !pStr1)
+	if (!cb || !pStr)
 		return CIRCBUF_ERROR;
 	if (size > cb->end) {
 
@@ -265,7 +265,7 @@ size_t space_left = CIRCBUF_SPACE_LEFT(cb->empty, cb->current_end,
 	 * space in the circular buffer is insufficient for the allocation
 	 * requested.
 	 */
-	if ((size > space_left) && !(flags & CIRCBUF_DATALOSS))
+	if ((size > space_left) && !(flags & CIRCBUF_DATALOSS)) {
 
 		*pStr = NULL;
 
