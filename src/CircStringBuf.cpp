@@ -22,6 +22,8 @@
  *
  */
 
+#include <CircStringBuf.h>
+
 CircularStringBuffer::CircularStringBuffer(size_t size)
 	: bufferCtl({NULL, 0, 0, 0, true}) {
 
