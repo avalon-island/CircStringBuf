@@ -193,9 +193,7 @@ int result = CIRCBUF_OK;
 	/*
 	 * Buffer space can be allocated as contiguous pack of bytes.
 	 */
-    if (cb->current_end + *size <= (cb->current_start < cb_current_end) ?
-		cb->end :
-		cb->current_start) {
+    if (cb->current_end + *size <= cb->end) {
 
 		*pStr1 = cb->start + cb->current_end;
 		*pStr2 = NULL;
@@ -292,9 +290,7 @@ size_t space_left = CIRCBUF_SPACE_LEFT(cb->empty, cb->current_end,
 		cb->current_start = (cb->current_start + 1) % cb->end;
 	}
 
-	if (cb->current_end + size <= (cb->current_start < cb_current_end) ?
-		cb->end :
-		cb->current_start) {
+	if (cb->current_end + size <= cb->end) {
 
 		/*
 		 * 1. The easiest case: we have sufficient amount of free space
@@ -356,9 +352,7 @@ size_t space_left = CIRCBUF_SPACE_LEFT(cb->empty, cb->current_end,
 		cb->current_start = (cb->current_start + 1) % cb->end;
 	}
 
-	if (cb->current_end + len <= (cb->current_start < cb_current_end) ?
-		cb->end :
-		cb->current_start) {
+	if (cb->current_end + len <= cb->end) {
 
 		strncpy(cb->start + cb->current_end, string, len - 1);
 		*(cb->start + cb->current_end + len - 1) = '\0';
