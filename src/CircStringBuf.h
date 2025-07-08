@@ -34,7 +34,9 @@
 #endif /* defined(HAVE_CONFIG_H) */
 
 #include <ThreadCompat.h>
-#include <circstringbuf/circstringbuf.h>
+extern "C" {
+#	include <circstringbuf/circstringbuf.h>
+}
 
 class CircularStringBuffer {
 
