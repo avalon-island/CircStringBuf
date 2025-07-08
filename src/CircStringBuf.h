@@ -85,10 +85,20 @@ public:
 protected:
 
 	inline int
+	pmalloc(char **pStr1, size_t *pSize, char **pStr2) {
+
+		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, 0);
+	}
+	inline int
 	pmalloc(char **pStr1, size_t *pSize, char **pStr2,
 		circstringbufstatus_t flags) {
 
 		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, flags);
+	}
+	inline int
+	pmalloc_contiguous(char **pStr1, size_t size) {
+
+		return circstringbuf_malloc_contiguous(&bufferCtl, pStr1, size, 0);
 	}
 	inline int
 	pmalloc_contiguous(char **pStr1, size_t size, circstringbufstatus_t flags) {
