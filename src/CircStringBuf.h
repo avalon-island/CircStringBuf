@@ -44,38 +44,61 @@ public:
 	CircularStringBuffer(size_t size);
 	~CircularStringBuffer();
 
-	inline int reset(void) {
+	inline int
+	reset(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_reset(&bufferCtl);
 	}
 
-	int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
+	inline int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
 
-	int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
-	int push(const char *string) {
+	inline int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
+	inline int
+	push(const char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_push(&bufferCtl, string);
 	}
 
-	int pstrlen(size_t &size) {
+	inline int
+	pstrlen(size_t &size) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_strlen(&bufferCtl, &size);
 	}
-	int pop(char *string) {
+	inline int
+	pop(char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_pop(&bufferCtl, string);
 	}
-	int drop(void) {
+	inline int
+	drop(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_drop(&bufferCtl);
 	}
 
 protected:
+
+	inline int
+	pmalloc(char **pStr1, size_t *pSize, char **pStr2,
+		circstringbufstatus_t flags) {
+
+		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, flags);
+	}
+	inline int
+	pmalloc_contiguous(char **pStr1, size_t size, circstringbufstatus_t flags) {
+
+		return circstringbuf_malloc_contiguous(&bufferCtl, pStr1, size, flags);
+	}
+
+	inline int
+	span(char **pStr1, size_t *pSize, char **pStr2) {
+
+		return circstringbuf_span(&bufferCtl, pStr1, pSize, pStr2);
+	}
 
 	thread::Mutex mtxCSBuffer;
 
@@ -93,38 +116,61 @@ public:
 	StaticCircularStringBuffer() : bufferCtl({buffer, BufferSize, 0, 0, true}) {}
 	~StaticCircularStringBuffer() {}
 
-	inline int reset(void) {
+	inline int
+	reset(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_reset(&bufferCtl);
 	}
 
-	int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
+	inline int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
 
-	int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
-	int push(const char *string) {
+	inline int checkFit(size_t size) { return circstringbuf_checkfit(&bufferCtl, size); }
+	inline int
+	push(const char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_push(&bufferCtl, string);
 	}
 
-	int pstrlen(size_t &size) {
+	inline int
+	pstrlen(size_t &size) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_strlen(&bufferCtl, &size);
 	}
-	int pop(char *string) {
+	inline int
+	pop(char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_pop(&bufferCtl, string);
 	}
-	int drop(void) {
+	inline int
+	drop(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_drop(&bufferCtl);
 	}
 
 protected:
+
+	inline int
+	pmalloc(char **pStr1, size_t *pSize, char **pStr2,
+		circstringbufstatus_t flags) {
+
+		return circstringbuf_malloc(&bufferCtl, pStr1, pSize, pStr2, flags);
+	}
+	inline int
+	pmalloc_contiguous(char **pStr1, size_t size, circstringbufstatus_t flags) {
+
+		return circstringbuf_malloc_contiguous(&bufferCtl, pStr1, size, flags);
+	}
+
+	inline int
+	span(char **pStr1, size_t *pSize, char **pStr2) {
+
+		return circstringbuf_span(&bufferCtl, pStr1, pSize, pStr2);
+	}
 
 	thread::Mutex mtxCSBuffer;
 
