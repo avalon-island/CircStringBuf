@@ -168,7 +168,7 @@ int result = CIRCBUF_OK;
 	 * one, as such, we can't just permit old data to be overwritten
 	 * by newer one -- we have to expunge THE ENTIRE OLDEST STRING.
 	 */
-	if ((*size > space_left) {
+	if (*size > space_left) {
 
 		/*
 		 * New proposed circular buffer start will be the current
