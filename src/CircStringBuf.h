@@ -177,6 +177,6 @@ protected:
 private:
 
 	circstringbuf_t bufferCtl;
-	char *buffer[BufferSize];
+	char buffer[BufferSize];
 };
 
