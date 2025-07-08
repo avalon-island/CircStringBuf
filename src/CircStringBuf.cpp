@@ -27,7 +27,7 @@
 CircularStringBuffer::CircularStringBuffer(size_t size)
 	: bufferCtl({NULL, 0, 0, 0, true}) {
 
-	if (buffer = malloc(size)) {
+	if (buffer = new char(size)) {
 
 		bufferCtl.start = buffer;
 		bufferCtl.end = size;
