@@ -150,7 +150,7 @@ size_t space_left = CIRCBUF_SPACE_LEFT(cb->empty, cb->current_end,
 	 * space in the circular buffer is insufficient for the allocation
 	 * requested.
 	 */
-	if ((*size > space_left) && !(flags & CIRCBUF_DATALOSS))
+	if ((*size > space_left) && !(flags & CIRCBUF_DATALOSS)) {
 
 		*pStr1 = NULL;
 
