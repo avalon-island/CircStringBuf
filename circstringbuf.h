@@ -128,7 +128,9 @@ int circstringbuf_filllevel(circstringbuf_t *);
  * check if the string will fit to buffer
  *
  * @param circstringbuf_t *cb   - static circbuffer object
- * @param const char *string    - string that is copied to the buffer
+ * @param size_t *pSize         - pointer to variable holds size to check
+ *                                and where maximum contiguous space size
+ *                                will be stored in a case of CIRCBUF_WRAP
  * @return enum                 - CIRCBUF_OK if string will fit natively
  *                              - CIRCBUF_WRAP if string will fit with
  *                                buffer wrapping, i.e. as two
@@ -142,7 +144,7 @@ int circstringbuf_filllevel(circstringbuf_t *);
  *
  */
 int circstringbuf_checkfit(circstringbuf_t *,
-	size_t);
+	size_t *);
 
 /*
  * allocate space in the circular buffer

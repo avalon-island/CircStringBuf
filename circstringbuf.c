@@ -92,20 +92,23 @@ int flevel = (cb->end + cb->current_end - cb->current_start) % cb->end;
  *     "does not fit"
  */
 int
-circstringbuf_checkfit(circstringbuf_t *cb, size_t size) {
+circstringbuf_checkfit(circstringbuf_t *cb, size_t *pSize) {
 circstringbufstatus_t status = CIRCBUF_OK;
 
-	if (!cb || size > cb->end)
+	if (!cb || !pSize || *pSize > cb->end)
 		return CIRCBUF_ERROR;
 
 size_t space_left = CIRCBUF_SPACE_LEFT(cb->empty, cb->current_end,
 	cb->current_start, cb->end);
 
-	if (size > space_left)
+	if (*pSize > space_left)
 		status = CIRCBUF_DATALOSS;
 
-	if ((cb->end - cb->current_end) < size)
+	if ((cb->end - cb->current_end) < *pSize) {
+
+		*pSize = cb->end - cb->current_end;
 		status |= CIRCBUF_WRAP;
+	}
 
 	return status;
 }
