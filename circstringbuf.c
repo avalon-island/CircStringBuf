@@ -137,7 +137,7 @@ circstringbuf_malloc(circstringbuf_t *cb, char **pStr1,
 		return CIRCBUF_ERROR;
 	if (*size > cb->end) {
 
-		*pStr = NULL;
+		*pStr1 = NULL;
 
 		return CIRCBUF_ERROR;
 	}
@@ -150,9 +150,9 @@ size_t space_left = CIRCBUF_SPACE_LEFT(cb->empty, cb->current_end,
 	 * space in the circular buffer is insufficient for the allocation
 	 * requested.
 	 */
-	if ((size > space_left) && !(flags & CIRCBUF_DATALOSS))
+	if ((*size > space_left) && !(flags & CIRCBUF_DATALOSS))
 
-		*pStr = NULL;
+		*pStr1 = NULL;
 
 		return CIRCBUF_ERROR;
 	}
