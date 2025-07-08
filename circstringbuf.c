@@ -180,6 +180,7 @@ int result = CIRCBUF_OK;
 		/*
 		 * If it falls into the middle of some string in the buffer,
 		 * let's advance it till '\0' will be found...
+		 */
 		while (*(cb->start + cb->current_start) != '\0') {
 
 			cb->current_start = (cb->current_start + 1) % cb->end;
