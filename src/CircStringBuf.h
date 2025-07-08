@@ -46,7 +46,7 @@ public:
 	CircularStringBuffer(size_t size);
 	~CircularStringBuffer();
 
-	inline int
+	int
 	reset(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
@@ -56,26 +56,26 @@ public:
 	inline int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
 
 	inline int checkFit(size_t &size) { return circstringbuf_checkfit(&bufferCtl, &size); }
-	inline int
+	int
 	push(const char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_push(&bufferCtl, string);
 	}
 
-	inline int
+	int
 	pstrlen(size_t &size) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_strlen(&bufferCtl, &size);
 	}
-	inline int
+	int
 	pop(char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_pop(&bufferCtl, string);
 	}
-	inline int
+	int
 	drop(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
@@ -125,10 +125,10 @@ class StaticCircularStringBuffer {
 
 public:
 
-	StaticCircularStringBuffer() : bufferCtl({buffer, BufferSize, 0, 0, true}) {}
+	StaticCircularStringBuffer() : bufferCtl({buffer, BufferSize, 0, 0, true}) { memset(buffer, 0, BufferSize); }
 	~StaticCircularStringBuffer() {}
 
-	inline int
+	int
 	reset(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
@@ -138,26 +138,26 @@ public:
 	inline int fillLevel(void) { return circstringbuf_filllevel(&bufferCtl); }
 
 	inline int checkFit(size_t &size) { return circstringbuf_checkfit(&bufferCtl, &size); }
-	inline int
+	int
 	push(const char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_push(&bufferCtl, string);
 	}
 
-	inline int
+	int
 	pstrlen(size_t &size) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_strlen(&bufferCtl, &size);
 	}
-	inline int
+	int
 	pop(char *string) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 
 		return circstringbuf_pop(&bufferCtl, string);
 	}
-	inline int
+	int
 	drop(void) {
 	thread::ScopedMutexLock lock(mtxCSBuffer);
 

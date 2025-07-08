@@ -31,6 +31,8 @@ CircularStringBuffer::CircularStringBuffer(size_t size)
 
 		bufferCtl.start = buffer;
 		bufferCtl.end = size;
+
+		memset(buffer, 0, size);
 	}
 }
 
