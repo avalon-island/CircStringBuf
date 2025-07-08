@@ -185,7 +185,7 @@ int result = CIRCBUF_OK;
 
 			cb->current_start = (cb->current_start + 1) % cb->end;
 		}
-		/* ... and skip that '\0'.
+		/* ... and skip that '\0'. */
 		cb->current_start = (cb->current_start + 1) % cb->end;
 
 		result |= CIRCBUF_DATALOSS;
